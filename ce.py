@@ -134,5 +134,3 @@ def hysteresis(img, weak, strong=255):
 
 final=hysteresis(DT[0],DT[1])
 
-import cv2
-cv2.imwrite("color_edge_detected", final)
