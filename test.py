@@ -83,37 +83,24 @@ print(new_img.size)
 
 """Colorspace transform"""
 
-#Colorspace transform
+#Colormap transform
+# image path 
+path = r'Z:/SEM 8/Computer Vision/image.jpeg'
 
-img = cv2.imread("car.jpg")
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-plt.imshow(img)
+# using imread()  
+img = cv2.imread(path)
 
-#CMAP= "VIRIDIS"
-cmap_img1 = img[:, :, 0]
-#CMAP= "VIRIDIS"
-cmap_img2 = img[:, :, 0]
-#CMAP= "YlOrBr"
-cmap_img3 = img[:, :, 0]
-#CMAP= "PuBuGn"
-cmap_img4 = img[:, :, 0]
+im1 = cv2.applyColorMap(img, cv2.COLORMAP_AUTUMN)
+im2 = cv2.applyColorMap(img, cv2.COLORMAP_BONE)
+im3 = cv2.applyColorMap(img, cv2.COLORMAP_JET)
+im4 = cv2.applyColorMap(img, cv2.COLORMAP_WINTER)
 
-f, axarr = plt.subplots(2,2)
-f.set_figwidth(10)
-f.set_figheight(6)
-X=axarr[0,0].imshow(cmap_img1, cmap="hot", aspect= 1.5)
-plt.colorbar(X, ax=axarr[0, 0])
-X=axarr[0,1].imshow(cmap_img2, cmap="viridis" , aspect=1.5)
-plt.colorbar(X, ax=axarr[0, 1])
-X=axarr[1,0].imshow(cmap_img3, cmap="RdPu", aspect=1.5)
-plt.colorbar(X, ax=axarr[1, 0])
-X=axarr[1,1].imshow(cmap_img4, cmap="PuBuGn", aspect=1.5)
-plt.colorbar(X, ax=axarr[1, 1])
-axarr[0, 0].set_title("Hot")
-axarr[0, 1].set_title("viridis")
-axarr[1, 0].set_title("RdPu")
-axarr[1, 1].set_title("PuBuGn")
-f.tight_layout()
+cv2.imshow('Image',im1)
+cv2.imshow('Image',im2)
+cv2.imshow('Image',im3)
+cv2.imshow('Image',im4)
+
+
 
 #Changing the higher and lower order bit values 
 f, axarr2 = plt.subplots(2,2)
@@ -383,7 +370,7 @@ cropped_image = image[int(r[1]):int(r[1]+r[3]),
 cv2.imshow("Cropped image", cropped_image)
 cv2.waitKey(0)
 
-#colorspace transform
+#Colorspace transform
 
 # Visualizing the R,G and B component
 
