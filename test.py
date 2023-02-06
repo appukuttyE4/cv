@@ -383,4 +383,84 @@ cropped_image = image[int(r[1]):int(r[1]+r[3]),
 cv2.imshow("Cropped image", cropped_image)
 cv2.waitKey(0)
 
+#colorspace transform
+
+# Visualizing the R,G and B component
+
+B,G,R = cv2.split(rubix_bright)
+cv2.imshow("R_Bright",R)
+cv2.imshow("G_Bright",G)
+cv2.imshow("B_Bright",B)
+
+
+B,G,R = cv2.split(rubix_dark)
+cv2.imshow("R_Dark",R)
+cv2.imshow("G_Dark",G)
+cv2.imshow("B_Dark",B)
+
+# Converting to LAB color space
+
+brightLAB = cv2.cvtColor(rubix_bright, cv2.COLOR_BGR2LAB)
+darkLAB = cv2.cvtColor(rubix_dark, cv2.COLOR_BGR2LAB)
+
+cv2.imshow("Outdoor LAB",brightLAB)
+cv2.imshow("Indoor LAB",darkLAB)
+
+# Visualizing the L,A and B component
+
+L,A,B = cv2.split(brightLAB)
+cv2.imshow("L_Bright",L)
+cv2.imshow("A_Bright",A)
+cv2.imshow("B_Bright",B)
+
+
+L,A,B = cv2.split(darkLAB)
+cv2.imshow("L_Dark",L)
+cv2.imshow("A_Dark",A)
+cv2.imshow("B_Dark",B)
+
+# Converting to YCbCr color space
+
+brightYCB = cv2.cvtColor(rubix_bright, cv2.COLOR_BGR2YCrCb)
+darkYCB = cv2.cvtColor(rubix_dark, cv2.COLOR_BGR2YCrCb)
+
+cv2.imshow("Outdoor YCbCr",brightYCB)
+cv2.imshow("Indoor YCbCr",darkYCB)
+
+# Visualizing the Y,Cb and Cr component
+
+Y,Cr,Cb = cv2.split(brightYCB)
+cv2.imshow("Y_Bright",Y)
+cv2.imshow("Cb_Bright",Cb)
+cv2.imshow("Cr_Bright",Cr)
+
+
+Y,Cr,Cb = cv2.split(darkYCB)
+cv2.imshow("Y_Dark",Y)
+cv2.imshow("Cb_Dark",Cb)
+cv2.imshow("Cr_Dark",Cr)
+
+# Converting to HSV color space
+
+brightHSV = cv2.cvtColor(rubix_bright, cv2.COLOR_BGR2HSV)
+darkHSV = cv2.cvtColor(rubix_dark, cv2.COLOR_BGR2HSV)
+
+cv2.imshow("Outdoor HSV",brightHSV)
+cv2.imshow("Indoor HSV",darkHSV)
+
+# Visualizing the H,S and V component
+
+H,S,V = cv2.split(brightHSV)
+cv2.imshow("H_Bright",H)
+cv2.imshow("S_Bright",S)
+cv2.imshow("V_Bright",V)
+
+
+H,S,V = cv2.split(darkHSV)
+cv2.imshow("H_Dark",H)
+cv2.imshow("S_Dark",S)
+cv2.imshow("V_Dark",V)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
