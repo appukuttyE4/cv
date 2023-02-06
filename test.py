@@ -361,3 +361,26 @@ po_filter_hori = np.array([[-1, -1, -1],
 img = cv2.filter2D(img_blur,-1, po_filter_hori)
 cv2.imshow('Prewitt Operator - Horizontal Edges',img)
 cv2.waitKey(0)
+
+#ROI
+ROI 
+
+import cv2
+import numpy as np
+
+
+# Read image
+image = cv2.imread("Z:/SEM 8/Computer Vision/image.jpeg")
+
+# Select ROI
+r = cv2.selectROI("Select the area", image)
+
+# Crop image
+cropped_image = image[int(r[1]):int(r[1]+r[3]),
+                    int(r[0]):int(r[0]+r[2])]
+
+# Display cropped image
+cv2.imshow("Cropped image", cropped_image)
+cv2.waitKey(0)
+
+
