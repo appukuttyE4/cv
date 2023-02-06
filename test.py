@@ -216,3 +216,148 @@ edge = cv2.Canny(img, t_lower, t_upper)
   
 cv2_imshow(img)
 cv2_imshow(edge)
+
+#Noises
+
+
+
+import skimage
+import cv2
+
+image = cv2.imread('Z:/SEM 8/Computer Vision/PS 4/Shapes.png')
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# Gaussian Noise
+gaussian_noise = skimage.util.random_noise(image, mode="gaussian")
+cv2.imshow('Gaussian Noise',gaussian_noise)
+cv2.imwrite('Z:/SEM 8/Computer Vision/PS 4/Gaussian_noise.jpg',255*gaussian_noise)
+cv2.waitKey(0)
+
+# Poisson Noise
+poisson_noise = skimage.util.random_noise(image, mode="poisson")
+cv2.imshow('Poisson Noise',poisson_noise)
+cv2.imwrite('Z:/SEM 8/Computer Vision/PS 4/Poisson_noise.jpg', 255*poisson_noise)
+cv2.waitKey(0)
+
+
+# S&P Noise
+salt_and_pepper = skimage.util.random_noise(image, mode="s&p")
+cv2.imshow('Salt_and_Pepper Noise',salt_and_pepper)
+cv2.imwrite('Z:/SEM 8/Computer Vision/PS 4/S&P_noise.jpg', 255*salt_and_pepper)
+cv2.waitKey(0)
+
+# Note :
+   
+ '''   The pixel values were too close to 0 or too far away from 255 , hence imwrite()
+       cannot handle that ,it considers them to be colorless and hence the multiplication with 255 '''
+
+
+
+Noised images la filters
+
+
+
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Jan 19 11:23:42 2023
+
+@author: 19pw34
+"""
+import skimage
+import cv2
+
+# Gaussian
+
+g_image = cv2.imread('Z:/SEM 8/Computer Vision/PS 4/Gaussian_noise.jpg')
+
+blur_image = cv2.blur(g_image,(9,9))
+cv2.imshow('Mean Filter - Gaussian',blur_image)
+medianBlur_image = cv2.medianBlur(g_image,9)
+cv2.imshow('Median Filter - Gaussian',medianBlur_image)
+cv2.waitKey(0)
+
+# Poisson
+p_image = cv2.imread('Z:/SEM 8/Computer Vision/PS 4/Poisson_noise.jpg')
+
+blur_image = cv2.blur(p_image,(9,9))
+cv2.imshow('Mean Filter - Poisson',blur_image)
+medianBlur_image = cv2.medianBlur(p_image,9)
+cv2.imshow('Median Filter - Poisson',medianBlur_image)
+cv2.waitKey(0)
+
+
+# Salt & Pepper
+sp_image = cv2.imread('Z:/SEM 8/Computer Vision/PS 4/S&P_noise.jpg')
+
+blur_image = cv2.blur(sp_image,(9,9))
+cv2.imshow('Mean Filter - SaltPepper',blur_image)
+medianBlur_image = cv2.medianBlur(sp_image,9)
+cv2.imshow('Median Filter - SaltPepper',medianBlur_image)
+cv2.waitKey(0)
+
+
+
+-- Filters 
+
+
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Jan 12 11:06:39 2023
+
+@author: 19pw34
+"""
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+image = cv2.imread('Shapes.png')
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# Mean filter
+blur_image = cv2.blur(image,(9,9))
+cv2.imshow('Mean Filter',blur_image)
+cv2.waitKey(0)
+
+# Median filter
+medianBlur_image = cv2.medianBlur(image,9)
+cv2.imshow('Median Filter',medianBlur_image)
+cv2.waitKey(0)
+
+# Gaussian Blur
+gaussianBlur_image = cv2.GaussianBlur(image,(9,9),30)
+cv2.imshow('Gaussian Filter',gaussianBlur_image)
+cv2.waitKey(0)
+
+
+
+
+-- Sobel and Prewitt
+
+# Sobel Edge Detection
+sobelx = cv2.Sobel(src=img_blur, ddepth=cv2.CV_64F, dx=1, dy=0, ksize=5)
+sobely = cv2.Sobel(src=img_blur, ddepth=cv2.CV_64F, dx=0, dy=1, ksize=5)
+sobelxy = cv2.Sobel(src=img_blur, ddepth=cv2.CV_64F, dx=1, dy=1, ksize=5) # Combined X and Y Sobel Edge Detection
+# Display Sobel Edge Detection Images
+cv2.imshow('Sobel Horizontal', sobelx)
+cv2.waitKey(0)
+cv2.imshow('Sobel Vertical', sobely)
+cv2.waitKey(0)
+cv2.imshow('Sobel Operator', sobelxy)
+cv2.waitKey(0)
+
+# Prewitt Operator - Vertical Edges
+
+po_filter_vert = np.array([[-1, 0, 1],
+                   [-1, 0, 1],
+                   [-1, 0, 1]])
+img = cv2.filter2D(img_blur,-1, po_filter_vert)
+cv2.imshow('Prewitt Operator - Vertical Edges',img)
+cv2.waitKey(0)
+
+# Prewitt Operator - Horizontal Edges
+
+po_filter_hori = np.array([[-1, -1, -1],
+                   [0, 0, 0],
+                   [1, 1, 1]])
+img = cv2.filter2D(img_blur,-1, po_filter_hori)
+cv2.imshow('Prewitt Operator - Horizontal Edges',img)
+cv2.waitKey(0)
